@@ -22,7 +22,7 @@ class WordEntry(BaseModel):
 class DictionaryEntries(BaseModel):
     entries: List[WordEntry]
     
-with open("./data/output_compiled/keywords/keywords.json") as json_file:
+with open("./data/output/keywords/keywords.json") as json_file:
         loaded_keywords = json.load(json_file)
 
 # Deserializing the JSON data into Pydantic models

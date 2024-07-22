@@ -93,14 +93,12 @@ with tab1:
         st.audio(base64.b64decode(chinese_keywords[st.session_state.word_number].pronounciation_audio_bytes.encode('utf-8')))
         st.divider()
         st.markdown(f"<h5 style='text-align: left;'>Definitions</h5>", unsafe_allow_html=True)
-        for defintion in chinese_keywords[st.session_state.word_number].definitions:
-            st.write(defintion)
+        definitions = [defintion for defintion in chinese_keywords[st.session_state.word_number].definitions]
+        st.text("\n".join(definitions))
         st.divider()
         st.markdown(f"<h5 style='text-align: left;'>Example Usages</h5>", unsafe_allow_html=True)
         for example_usage in chinese_keywords[st.session_state.word_number].example_usages:
-            st.write(f"PY: {example_usage.pinyin}")
-            st.write(f"CH: {example_usage.chinese}")
-            st.write(f"EN: {example_usage.english}")
+            st.text(f"PY: {example_usage.pinyin}\nCH: {example_usage.chinese}\nEN: {example_usage.english}")
             st.audio(base64.b64decode(example_usage.audio_bytes.encode('utf-8')))
             st.divider()
         
