@@ -119,7 +119,7 @@ with tab2:
     # convert data to pandas dataframe
 
     # Use a text_input to get the keywords to filter the dataframe
-    text_search = st.text_input("Search in titles, words and answers", value="")
+    text_search = st.text_input("Search word, pinyin, or Chinese", value="")
     # 'word', 'pinyin', 'translation', 'definitions', 'example_usages'
     # Filter the dataframe using masks
     m1 = chinese_keywords_df["word"].str.contains(text_search, case=False)
@@ -140,11 +140,23 @@ with tab2:
                 cols = st.columns(N_cards_per_row, gap="large")
             # draw the card
             with cols[n_row % N_cards_per_row]:
+                st.markdown(f"<h5 style='text-align: center;'>Word: {row['word']}</h5>", unsafe_allow_html=True)
+                st.markdown(f"<h5 style='text-align: center;'>Pinyin: {row['pinyin']}</h5>", unsafe_allow_html=True)
+                st.markdown(f"<h5 style='text-align: center;'>Translation: {row['translation']}</h5>", unsafe_allow_html=True)
+                st.divider()
+                st.markdown(f"<h5 style='text-align: left;'>Definitions</h5>", unsafe_allow_html=True)
+                definitions = [defintion for defintion in row["definitions"]]
+                st.text("\n".join(definitions))
+                st.divider()
+                st.markdown(f"<h5 style='text-align: left;'>Example Usages</h5>", unsafe_allow_html=True)
+                for example_usage in row["example_usages"]:
+                    st.text(f"PY: {example_usage['pinyin']}\nCH: {example_usage['chinese']}\nEN: {example_usage['english']}")
+                    st.divider()
                 # st.caption(f"word {row['No']:0.0f}")
-                st.caption(f"{row['word']}")
-                st.markdown(f"**{row['pinyin']}**")
-                st.markdown(f"{row['translation']}")
-                st.markdown(f"{row['definitions']}")
-                st.markdown(f"{row['example_usages']}")
+                # st.caption(f"{row['word']}")
+                # st.markdown(f"**{row['pinyin']}**")
+                # st.markdown(f"{row['translation']}")
+                # st.markdown(f"{row['definitions']}")
+                # st.markdown(f"{row['example_usages']}")
                 # with st.expander("Answer"):
                 #     st.markdown(f"*{row['Answer'].strip()}*")
