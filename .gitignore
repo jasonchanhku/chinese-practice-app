@@ -6,6 +6,8 @@ __pycache__/
 # C extensions
 *.so
 
+data/output/keywords/keywords.json
+
 **/secrets.toml
 # Distribution / packaging
 .Python
