@@ -38,7 +38,9 @@ tab1, tab2 = st.tabs(["Flashcards", "Search engine"])
 
 # rows = pandas.read_csv("./data/chinese_keywords_sample.csv")
 
-word_list = [i for i in range(1, len(chinese_keywords)+1)]
+#word_list = [i for i in range(1, len(chinese_keywords)+1)]
+
+word_list = [f"{index + 1}. {keywords.word}" for index, keywords in enumerate(chinese_keywords)]
 
 with tab1:
     # st.title("Product Owner Interview words Flashcards")
@@ -61,6 +63,11 @@ with tab1:
     with col3:
         specific_word = st.selectbox("Select specific word",
                                      word_list, label_visibility="collapsed", index=None, on_change=select_callback)
+        
+        if specific_word is None:
+            specific_word = word_list[0]
+        
+        specific_word = specific_word.split(". ")[0]
 
     with col4:
         random_word = st.button(
