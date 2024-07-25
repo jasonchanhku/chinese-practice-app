@@ -21,6 +21,12 @@ def select_callback():
 
 with st.sidebar:
     st.write("**Author: Jason Chan**")
+    st.markdown("""
+    
+    # Exam Format
+    
+    - Read out 50 words
+    """)
 # ---------------- CSS ----------------
 
 local_css("style.css")
